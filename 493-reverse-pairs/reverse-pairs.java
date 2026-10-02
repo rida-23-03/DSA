@@ -1,32 +1,36 @@
 class Solution {
     public int reversePairs(int[] nums) {
-        return mergeCount(nums,0,nums.length-1);
+        return mergeSort(nums,0,nums.length-1);
     }
-    static int mergeCount(int[] nums,int low,int high){
+    public int mergeSort(int[] nums,int low,int high){
         if(low>=high) return 0;
         int mid=low+(high-low)/2;
-        int count=mergeCount(nums,low,mid);
-        count+=mergeCount(nums,mid+1,high);
+        int count=mergeSort(nums,low,mid);
+        count+=mergeSort(nums,mid+1,high);
         count+=merge(nums,low,mid,high);
+
         return count;
     }
-    static int merge(int[] nums,int low,int mid,int high){
-        int count=0;
+    public int merge(int[] nums,int low,int mid,int high){
         int j=mid+1;
+        int count=0;
         for(int i=low;i<=mid;i++){
-            while(j<=high && nums[i]>(long)2*nums[j])
+            while(j<=high && nums[i]>(long)2*nums[j]){
                 j++;
-                count+=(j-(mid+1));
+            }
+            count+=(j-(mid+1));
         }
-        ArrayList<Integer> temp=new ArrayList<>();
         int left=low;
         int right=mid+1;
+        ArrayList<Integer> temp=new ArrayList<>();
         while(left<=mid && right<=high){
             if(nums[left]<=nums[right]){
-                temp.add(nums[left++]);
+                temp.add(nums[left]);
+                left++;
             }
             else{
-                temp.add(nums[right++]);
+                temp.add(nums[right]);
+                right++;
             }
         }
         while(left<=mid) temp.add(nums[left++]);
