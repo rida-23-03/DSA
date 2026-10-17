@@ -1,13 +1,13 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-        int m=matrix.length; //cols
-        int n=matrix[0].length; //rows
+        int m=matrix.length; //rows
+        int n=matrix[0].length; //cols
         boolean firstrow=false;
         boolean firstcol=false;
 
         //check if first row has zeros
         for(int j=0;j<n;j++){ 
-            if(matrix[0][j]==0){
+            if(matrix[0][j]==0){ //0 is 1st row j cols
                 firstrow=true;
                 break;
             }
@@ -23,8 +23,8 @@ class Solution {
         for(int i=1;i<m;i++){
             for(int j=1;j<n;j++){
                 if(matrix[i][j]==0){
-                    matrix[i][0]=0;
-                    matrix[0][j]=0;
+                    matrix[i][0]=0; //first col
+                    matrix[0][j]=0; //first row
                 }
             }
         }
