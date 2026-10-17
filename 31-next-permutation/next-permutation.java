@@ -25,7 +25,7 @@ class Solution {
         //reverse after the breakpoint
         int l=i+1;
         int r=n-1;
-        while(l<r){
+        while(l<=r){
             int temp=nums[l];
             nums[l]=nums[r];
             nums[r]=temp;
