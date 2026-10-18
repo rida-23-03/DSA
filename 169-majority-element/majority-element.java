@@ -1,16 +1,27 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int threshold=nums.length/2;
-        HashMap<Integer,Integer> mp=new HashMap<>();
-        for(int i=0;i<nums.length;i++){
-            int curr=nums[i];
-            mp.put(curr,mp.getOrDefault(curr,0)+1);
-
-            if(mp.get(curr)>threshold){
-                return curr;
+        int n=nums.length;
+        int candidate1=0, count1=0;
+        for(int num:nums){
+            if(count1==0){
+                candidate1=num;
+                count1=1;
+            }
+            else if(num==candidate1){
+                count1++;
+            }
+            else{
+                count1--;
             }
         }
-        return -1;
+
+        count1=0;
+        for(int num:nums){
+            if(num==candidate1) count1++;
+        }
+        int ans=0;
+        if(count1>n/2) ans=candidate1;
+        return ans;
         
     }
 }
