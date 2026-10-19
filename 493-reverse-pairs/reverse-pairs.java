@@ -1,6 +1,7 @@
 class Solution {
     public int reversePairs(int[] nums) {
         return mergeSort(nums,0,nums.length-1);
+    
     }
     public int mergeSort(int[] nums,int low,int high){
         if(low>=high) return 0;
@@ -15,29 +16,27 @@ class Solution {
         int j=mid+1;
         int count=0;
         for(int i=low;i<=mid;i++){
-            while(j<=high && nums[i]>(long)2*nums[j]){
+            while(j<=high && nums[i]>2L*nums[j]){
                 j++;
             }
-            count+=(j-(mid+1));
+            count+=j-(mid+1);
         }
         int left=low;
         int right=mid+1;
-        ArrayList<Integer> temp=new ArrayList<>();
+        List<Integer> temp=new ArrayList<>();
         while(left<=mid && right<=high){
             if(nums[left]<=nums[right]){
-                temp.add(nums[left]);
-                left++;
+                temp.add(nums[left++]);
             }
             else{
-                temp.add(nums[right]);
-                right++;
+                temp.add(nums[right++]);
             }
         }
-        while(left<=mid) temp.add(nums[left++]);
+        while(left<=mid)  temp.add(nums[left++]);;
         while(right<=high) temp.add(nums[right++]);
 
-        for(int i=low;i<=high;i++){
-            nums[i]=temp.get(i-low);
+        for(int i=0;i<temp.size();i++){
+            nums[low+i]=temp.get(i);
         }
         return count;
     }
