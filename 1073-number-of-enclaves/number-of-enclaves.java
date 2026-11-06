@@ -36,24 +36,12 @@ class Solution {
         int n=grid.length;
         int m=grid[0].length;
         int[][] vis=new int[n][m];
-        for(int j=0;j<m;j++){
-            if(grid[0][j]==1 && vis[0][j]==0){
-                vis[0][j]=1;
-                bfs(0,j,grid,vis);
-            }
-            if(grid[n-1][j]==1 && vis[n-1][j]==0){
-                vis[n-1][j]=1;
-                bfs(n-1,j,grid,vis);
-            }
-        }
         for(int i=0;i<n;i++){
-            if(grid[i][0]==1 && vis[i][0]==0){
-                vis[i][0]=1;
-                bfs(i,0,grid,vis);
-            }
-            if(grid[i][m-1]==1 && vis[i][m-1]==0){
-                vis[i][m-1]=1;
-                bfs(i,m-1,grid,vis);
+            for(int j=0;j<m;j++){
+                if((i==0||i==n-1||j==0||j==m-1)&& grid[i][j]==1 && vis[i][j]!=1){
+                    vis[i][j]=1;
+                    bfs(i,j,grid,vis);
+                }
             }
         }
         int count=0;
