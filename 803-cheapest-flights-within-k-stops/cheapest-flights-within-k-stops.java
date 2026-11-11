@@ -18,20 +18,20 @@ class Solution {
             int[] temp=dis.clone();
             for(int j=0;j<s;j++){
                 int[] curr=q.poll();
-                int stop=curr[0];
+                int fltaken=curr[0]; //no of flights taken(edges)
                 int place=curr[1];
                 int cost=curr[2];
 
-                if(stop==k+1) continue;
+                if(fltaken==k+1) continue;
 
                 for(int[] x:adj.get(place)){
                     int v=x[0];
                     int wt=x[1];
-                    int newstop=stop+1;
+                    int newfltaken=fltaken+1;
                     int newcost=cost+wt;
                     if(newcost<temp[v]){
                         temp[v]=newcost;
-                        q.add(new int[]{newstop,v,newcost});
+                        q.add(new int[]{newfltaken,v,newcost});
                     }
                 }
             }
