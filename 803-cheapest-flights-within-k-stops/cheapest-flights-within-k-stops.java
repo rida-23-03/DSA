@@ -15,7 +15,6 @@ class Solution {
 
         while(!q.isEmpty()){
             int s=q.size();
-            int[] temp=dis.clone();
             for(int j=0;j<s;j++){
                 int[] curr=q.poll();
                 int fltaken=curr[0]; //no of flights taken(edges)
@@ -29,13 +28,12 @@ class Solution {
                     int wt=x[1];
                     int newfltaken=fltaken+1;
                     int newcost=cost+wt;
-                    if(newcost<temp[v]){
-                        temp[v]=newcost;
+                    if(newcost<dis[v]){
+                        dis[v]=newcost;
                         q.add(new int[]{newfltaken,v,newcost});
                     }
                 }
             }
-            dis=temp;
         }
         if(dis[dst]==Integer.MAX_VALUE) return -1;
         return dis[dst];
